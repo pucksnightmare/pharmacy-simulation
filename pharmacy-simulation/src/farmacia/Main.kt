@@ -1,16 +1,39 @@
 package farmacia
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+    println("===== Simulación de un día en Farmacia 'Salud Total' =====")
+    println("Horario: 10:00 a.m. a 10:00 p.m.\n")
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
-    }
+    // Simular Turno 1: 10am–4pm
+    println("=== Turno 1 (10:00 a.m. - 4:00 p.m.) ===")
+    val ana = Cashier("Ana")
+    val carlosTurno1 = Stocker("Carlos")
+
+    val tAna = Thread(ana)
+    val tCarlos1 = Thread(carlosTurno1)
+
+    tAna.start()
+    tCarlos1.start()
+
+    tAna.join()
+    tCarlos1.join()
+
+    println("\nCambio de turno... (descanso simulado)")
+    Thread.sleep(1000)
+
+    // Simular Turno 2: 4pm–10pm
+    println("\n=== Turno 2 (4:00 p.m. - 10:00 p.m.) ===")
+    val luis = Pharmacist("Luis")
+    val carlosTurno2 = Stocker("Carlos") // mismo empleado (nueva instancia para la simulación)
+
+    val tLuis = Thread(luis)
+    val tCarlos2 = Thread(carlosTurno2)
+
+    tLuis.start()
+    tCarlos2.start()
+
+    tLuis.join()
+    tCarlos2.join()
+
+    println("\n===== Fin de la jornada en Farmacia 'Salud Total' =====")
 }

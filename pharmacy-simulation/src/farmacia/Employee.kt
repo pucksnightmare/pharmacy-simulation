@@ -1,4 +1,4 @@
-package pharmacy
+package farmacia
 
 class Employee {
 }
